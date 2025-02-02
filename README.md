@@ -38,7 +38,13 @@ Requirements:
             RPC_URL = "http://192.168.1.131:22555"
             DOGE_PAYOUT_ADDRESS = "D689FQb1NfbPb6PVH5zMKhmWM7oe8qGomx"
     
-      ...
+  python dogecoincpu.py
 
+
+  
+  D689FQb1NfbPb6PVH5zMKhmWM7oe8qGomx
+  
+  bc1qzmygyj8kyva85t89ajmn6rzcp5s0cqje6chyae
+  
 
   
