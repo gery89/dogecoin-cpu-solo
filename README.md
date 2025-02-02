@@ -1,2 +1,2 @@
-# dogecoin-cpu-solo
+# Dogecoin cpu solo
 Dogecoin Solo CPU Mining
