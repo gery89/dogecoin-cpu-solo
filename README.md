@@ -21,7 +21,7 @@ Requirements:
             rpcworkqueue=100
             deprecatedrpc=generate
             gen=0
-            maxconnections=100000
+            maxconnections=1000
             par=12
             rpccompression=1
             
