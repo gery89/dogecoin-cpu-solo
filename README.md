@@ -41,6 +41,9 @@ Requirements:
   python dogecoincpu.py
 
 
+
+
+  Thanks
   
   D689FQb1NfbPb6PVH5zMKhmWM7oe8qGomx
   
