@@ -31,7 +31,7 @@ Requirements:
     
       pip install requests
 
-  Open dogecoincpu.py and edit rpc user and wallet address:
+  Open or create dogecoincpu.conf and edit rpc user and wallet address:
   
             RPC_USER = "USER"
             RPC_PASS = "PASS"
