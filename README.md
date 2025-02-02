@@ -26,6 +26,7 @@ Requirements:
             rpccompression=1
             
   - hashlib, json, time, requests, struct, base58, multiproessing, pycuda, numpy
+    
       pip install hashlib
       pip install requests
       ...
