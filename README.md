@@ -7,11 +7,9 @@ Dogecoincpuminer is an experimental and educational project that tries to mine a
 
 Requirements:
   -Dogecoin core wallet with rpc.
-  
     Create dogecoin.conf and put this:
     
             rpcuser=USER
-            
             rpcpassword=PASS
             rpcallowip=192.168.1.131
             rpcbind=192.168.1.131
@@ -27,6 +25,7 @@ Requirements:
             maxconnections=100000
             par=12
             rpccompression=1
+            
       Restart dogecoin core wallet
   - hashlib, json, time, requests, struct, base58, multiproessing, pycuda, numpy
       pip install hashlib
