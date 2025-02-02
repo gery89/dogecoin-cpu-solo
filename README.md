@@ -6,7 +6,7 @@ Dogecoincpuminer is an experimental and educational project that tries to mine a
 (Currently the doge network has grown a lot, and today to mine doge requires ASICS machines. So it is practically impossible to mine a block with a cpu)
 
 Requirements:
-  - Dogecoin core wallet with rpc. Create dogecoin.conf and put thisand restart:
+  - Dogecoin core wallet with rpc. Create or edit dogecoin.conf and put thisand restart:
     
             rpcuser=USER
             rpcpassword=PASS
@@ -31,7 +31,7 @@ Requirements:
     
       pip install requests
 
-  Open or create dogecoincpu.conf and edit rpc user and wallet address:
+  Open or create dogecoincpu.py and edit rpc user and wallet address:
   
             RPC_USER = "USER"
             RPC_PASS = "PASS"
