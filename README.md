@@ -30,6 +30,12 @@ Requirements:
       pip install hashlib
     
       pip install requests
+
+  Open dogecoincpu.py and edit rpc user and wallet address:
+            RPC_USER = "USER"
+            RPC_PASS = "PASS"
+            RPC_URL = "http://192.168.1.131:22555"
+            DOGE_PAYOUT_ADDRESS = "D689FQb1NfbPb6PVH5zMKhmWM7oe8qGomx"
     
       ...
 
