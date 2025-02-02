@@ -11,6 +11,10 @@ import pycuda.autoinit
 from pycuda.compiler import SourceModule
 import numpy as np
 
+
+
+
+# Configuración RPC de Dogecoin Core
 RPC_USER = "USER"
 RPC_PASS = "PASS"
 RPC_URL = "http://192.168.1.131:22555"
@@ -24,6 +28,8 @@ def rpc_request(method, params=[]):
 
 def sha256d(data):
     return hashlib.sha256(hashlib.sha256(data).digest()).digest()
+    
+    
     return result_hash
 def base58_to_hash160(address):
     decoded = base58.b58decode_check(address)
@@ -87,17 +93,19 @@ def mine_block(nonce_start, nonce_end, queue, thread_id):
                 print(f"[✓] ¡Bloque encontrado! Hash: {block_hash}, Nonce: {nonce}")
                 submit_block(block_header.hex(), coinbase_tx, block["transactions"])
                 break
-            if time.time() - inicio >= 10:  # Cada 10 segundos, enviar estadísticas locales
+            if time.time() - inicio >= 10: 
                 queue.put(contador_local)
                 contador_local = 0
                 inicio = time.time()
             nonce += 1
 
 def submit_block(block_header_hex, coinbase_tx_hex, transactions):
-    full_block = block_header_hex + coinbase_tx_hex  # Incluir coinbase TX
+    full_block = block_header_hex + coinbase_tx_hex  
     for tx in transactions:
-        full_block += tx['data']  # Asegurar que es el formato correcto
+        full_block += tx['data'] 
+
     result = rpc_request("submitblock", [full_block])
+    
     if result is None:
         print("[✓] Bloque enviado correctamente")
     else:
@@ -106,14 +114,14 @@ def submit_block(block_header_hex, coinbase_tx_hex, transactions):
 def mostrar_estadisticas(queue, tiempo_inicio):
     contador_global = 0
     while True:
-        time.sleep(10)  # Actualizar cada 10 segundos
+        time.sleep(10)  
         operaciones_intervalo = 0
         while not queue.empty():
             operaciones_intervalo += queue.get()
         contador_global += operaciones_intervalo
         tiempo_transcurrido = time.time() - tiempo_inicio
-        gh_s = operaciones_intervalo / 10  # Operaciones por segundo en este intervalo
-        os.system('cls' if os.name == 'nt' else 'clear')  # Limpiar pantalla
+        gh_s = operaciones_intervalo / 10  
+        os.system('cls' if os.name == 'nt' else 'clear') 
         gh_s = gh_s / 1_000_000_000 
         print(f"Estadísticas de Minería:")
         print(f"======================")
@@ -144,4 +152,3 @@ def start_mining(threads):
 if __name__ == "__main__":
     threads = os.cpu_count()
     start_mining(threads)  # Puedes cambiar el número de hilos de minería
-
