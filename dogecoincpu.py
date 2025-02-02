@@ -142,5 +142,6 @@ def start_mining(threads):
         proceso.join()
 
 if __name__ == "__main__":
-    start_mining(threads=24)  # Puedes cambiar el número de hilos de minería
+    threads = os.cpu_count()
+    start_mining(threads)  # Puedes cambiar el número de hilos de minería
 
