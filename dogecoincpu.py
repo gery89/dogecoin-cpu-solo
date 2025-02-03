@@ -6,10 +6,7 @@ import struct
 import base58
 import multiprocessing
 import os
-import pycuda.driver as cuda
-import pycuda.autoinit
-from pycuda.compiler import SourceModule
-import numpy as np
+
 
 
 
@@ -27,10 +24,9 @@ def rpc_request(method, params=[]):
     return response.json()
 
 def sha256d(data):
-    return hashlib.sha256(hashlib.sha256(data).digest()).digest()
-    
-    
-    return result_hash
+    first_hash = hashlib.sha256(data).digest()
+    return hashlib.sha256(first_hash).digest() 
+
 def base58_to_hash160(address):
     decoded = base58.b58decode_check(address)
     return decoded[1:]  # Quita el prefijo de versión
@@ -38,18 +34,18 @@ def base58_to_hash160(address):
 def create_coinbase_tx(coinbase_value):
     version = struct.pack("<L", 1)
     input_count = b'\x01'
-    prev_tx = b'\x00' * 32  # TXID vacío porque es coinbase
-    prev_index = struct.pack("<L", 0xFFFFFFFF)  # Índice de entrada para coinbase
-    script_sig = b'\x04' + b'mine'  # Script de firma (puede variar dependiendo de la implementación)
-    script_sig_length = struct.pack("B", len(script_sig))  # Longitud del script de firma
-    sequence = struct.pack("<L", 0xFFFFFFFF)  # Secuencia (valor máximo para coinbase)
+    prev_tx = b'\x00' * 32  
+    prev_index = struct.pack("<L", 0xFFFFFFFF)  
+    script_sig = b'\x04' + b'mine' 
+    script_sig_length = struct.pack("B", len(script_sig))  
+    sequence = struct.pack("<L", 0xFFFFFFFF)  
     output_count = b'\x01'
-    reward = struct.pack("<Q", coinbase_value)  # Valor de la recompensa (8 bytes)
+    reward = struct.pack("<Q", coinbase_value)  
     hash160 = base58_to_hash160(DOGE_PAYOUT_ADDRESS)
     script_pubkey = b'\x76\xa9\x14' + hash160 + b'\x88\xac'
-    script_pubkey_length = struct.pack("B", len(script_pubkey))  # Longitud del script de salida
-    output = reward + script_pubkey_length + script_pubkey  # Salida completa
-    locktime = struct.pack("<L", 0)  # Locktime (sin restricciones de tiempo)
+    script_pubkey_length = struct.pack("B", len(script_pubkey))  
+    output = reward + script_pubkey_length + script_pubkey  
+    locktime = struct.pack("<L", 0) 
     coinbase_tx = (version + input_count + prev_tx + prev_index + 
                    script_sig_length + script_sig + sequence + 
                    output_count + output + locktime)
@@ -130,7 +126,7 @@ def mostrar_estadisticas(queue, tiempo_inicio):
         print(f"Tiempo: {tiempo_transcurrido / 60:.2f} minutos")
 
 def start_mining(threads):
-    total_nonces = 2**32  # Rango de nonces ajustado a 32 bits (Dogecoin usa 4 bytes)
+    total_nonces = 2**32  
     nonces_per_thread = total_nonces // threads
     queue = multiprocessing.Queue()
     procesos = []
